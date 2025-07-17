@@ -12,21 +12,10 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
 
-type LoginCardProps = {
-  onLogin: (data: { username: string; password: string }) => void;
-};
 
-export default function LoginCard({ onLogin }: LoginCardProps) {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    onLogin({ username, password });
-  }
-
-  return (
-    <Card className="w-full max-w-sm">
+export default function Home() {
+  return(
+  <Card className="w-full max-w-sm">
       <CardHeader>
         <img
           src="/logint-background.png"
@@ -39,7 +28,7 @@ export default function LoginCard({ onLogin }: LoginCardProps) {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="flex flex-col gap-6">
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
@@ -48,28 +37,22 @@ export default function LoginCard({ onLogin }: LoginCardProps) {
                 type="text"
                 placeholder="Your username"
                 required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
-                <Link to={"/login/forgotpassword"} className="w-full flex">
-                  <a
-                    href="#"
-                    className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                  >
-                    Forgot your password?
-                  </a>
-                </Link>
+                <a
+                  href="#"
+                  className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                >
+                  Forgot your password?
+                </a>
               </div>
               <Input
                 id="password"
                 type="password"
                 required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -78,11 +61,7 @@ export default function LoginCard({ onLogin }: LoginCardProps) {
               Login
             </Button>
             <Link to="/register" className="w-full">
-              <Button
-                variant="outline"
-                className="w-full cursor-pointer"
-                type="button"
-              >
+              <Button variant="outline" className="w-full cursor-pointer" type="button">
                 Sign Up
               </Button>
             </Link>
@@ -90,5 +69,5 @@ export default function LoginCard({ onLogin }: LoginCardProps) {
         </form>
       </CardContent>
     </Card>
-  );
+  )
 }
