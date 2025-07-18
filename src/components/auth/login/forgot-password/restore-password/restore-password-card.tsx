@@ -14,13 +14,22 @@ import { useState } from "react";
 
 type RestorePasswordCardProps = {
   onRestore: (data: { password: string }) => void;
+  loading?: boolean;
 };
 
-export default function RestorePasswordCard({ onRestore }: RestorePasswordCardProps) {
+export default function RestorePasswordCard({
+  onRestore,
+  loading = false,
+}: RestorePasswordCardProps) {
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("As senhas não conferem!");
+      return;
+    }
     onRestore({ password });
   }
 
@@ -48,16 +57,35 @@ export default function RestorePasswordCard({ onRestore }: RestorePasswordCardPr
                 placeholder="New password"
                 required
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="confirmPassword">Confirm new password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="Confirm new password"
+                required
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
           </div>
           <CardFooter className="flex-col gap-2 mt-6 px-0">
-            <Button type="submit" className="w-full cursor-pointer">
-              Send
+            <Button
+              type="submit"
+              className="w-full cursor-pointer"
+              disabled={loading}
+            >
+              {loading ? "Enviando..." : "Send"}
             </Button>
             <Link to="/login" className="w-full">
-              <Button variant="outline" className="w-full cursor-pointer" type="button">
+              <Button
+                variant="outline"
+                className="w-full cursor-pointer"
+                type="button"
+              >
                 Back to login
               </Button>
             </Link>

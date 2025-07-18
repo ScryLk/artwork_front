@@ -94,7 +94,7 @@ export default function RegisterCard({ onLogin }: LoginCardProps) {
             </Button>
             <Link to="/login" className="w-full">
               <Button variant="outline" className="w-full cursor-pointer" type="button">
-                Sign Up
+                Back to login
               </Button>
             </Link>
           </CardFooter>
